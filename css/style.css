@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 9999;
   transition: opacity 1s ease-in-out;
 }
 
@@ -120,11 +120,6 @@ body {
   z-index: 1;
 }
 
-/* Ensure content stays above spline but allows interaction */
-.header {
-  z-index: 1000;
-}
-
 .content-section,
 .hero-container {
   position: relative;
@@ -158,6 +153,11 @@ body {
 .content-section {
   background-color: transparent;
   position: relative;
+  min-height: 100vh;
+  padding: 120px 64px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .dark {
@@ -314,9 +314,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -384,8 +382,8 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2001;
-  background: rgba(18, 18, 18, 0.85);
+  z-index: 9997;
+  background: rgba(18, 18, 18, 0.077);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -529,7 +527,7 @@ body {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 3000;
+  z-index: 9998;
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -797,17 +795,8 @@ body {
   }
 }
 
-/* Content Sections */
-.content-section {
-  min-height: 100vh;
-  padding: 120px 64px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Ensure scroll indicator appears above section container */
-.content-section .scroll-indicator {
+.scroll-indicator {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -845,9 +834,7 @@ body {
   text-transform: uppercase;
   opacity: 0;
   transform: translateY(20px);
-  transition:
-    opacity 0.8s ease-out,
-    transform 0.8s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   margin-right: 64px;
 }
 

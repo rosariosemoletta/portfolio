@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="modal-detail-label">${label}</div>
           <div class="modal-detail-value">${value}</div>
         </div>
-      `,
+      `
       )
       .join("");
 
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isVideo: !!card.dataset.videoUrl,
         details: {
           Client: card.dataset.client || "Project Client",
-          Duration: card.dataset.duration || "3 months",
+          Source: card.dataset.source || "Link",
           Role: card.dataset.role || "Lead Designer",
           Technologies: card.dataset.technologies || "Technology stack used",
           Year: card.dataset.year || "2023",
