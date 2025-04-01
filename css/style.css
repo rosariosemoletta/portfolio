@@ -161,9 +161,7 @@ body {
 }
 
 .dark {
-  background-color: #000000;
-  position: relative;
-  z-index: 1;
+  background-color: #121212;
 }
 
 .cards-section {
