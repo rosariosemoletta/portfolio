@@ -9,6 +9,16 @@ function hideLoader() {
 
 // Wait for both DOM and Spline to load
 document.addEventListener("DOMContentLoaded", function () {
+  // Logo scroll-to-top functionality
+  const logoLink = document.querySelector(".logo");
+  logoLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
   // Check if Spline iframe is loaded
   const splineIframe = document.querySelector(".spline-container iframe");
   splineIframe.addEventListener("load", function () {
@@ -114,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="modal-detail-label">${label}</div>
           <div class="modal-detail-value">${value}</div>
         </div>
-      `
+      `,
       )
       .join("");
 
@@ -182,7 +192,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const menuButton = document.querySelector(".mobile-menu-button");
 
   menuButton.addEventListener("click", function () {
-    // Mobile menu toggle functionality can be implemented here
-    // when the mobile menu design is provided
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const isMenuActive = mobileMenu.classList.contains("active");
+
+    if (!isMenuActive) {
+      mobileMenu.style.display = "block";
+      // Force reflow
+      mobileMenu.offsetHeight;
+      mobileMenu.classList.add("active");
+      document.body.style.overflow = "hidden";
+    } else {
+      mobileMenu.classList.remove("active");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        mobileMenu.style.display = "none";
+      }, 300);
+    }
+  });
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", function (e) {
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const menuButton = document.querySelector(".mobile-menu-button");
+
+    if (
+      mobileMenu &&
+      mobileMenu.classList.contains("active") &&
+      !mobileMenu.contains(e.target) &&
+      !menuButton.contains(e.target)
+    ) {
+      menuButton.click();
+    }
   });
 });
