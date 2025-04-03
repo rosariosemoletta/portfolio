@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const splineIframe = document.querySelector(".spline-container iframe");
   splineIframe.addEventListener("load", function () {
     // Add longer delay before hiding loader
-    setTimeout(hideLoader, 5500);
+    setTimeout(hideLoader, 1500);
   });
 
   // Intersection Observer for fade effects
