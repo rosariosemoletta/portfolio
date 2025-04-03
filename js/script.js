@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Check if Spline iframe is loaded
   const splineIframe = document.querySelector(".spline-container iframe");
   splineIframe.addEventListener("load", function () {
+    hideLoader(); // rimuovere in caso di aggiunta delay
     // Add longer delay before hiding loader
     // setTimeout(hideLoader, 1500);
   });
