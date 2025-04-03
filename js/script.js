@@ -22,10 +22,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Check if Spline iframe is loaded
   const splineIframe = document.querySelector(".spline-container iframe");
   splineIframe.addEventListener("load", function () {
+    console.log("Iframe caricato! Nascondo il loader...");
     hideLoader(); // rimuovere in caso di aggiunta delay
     // Add longer delay before hiding loader
     // setTimeout(hideLoader, 1500);
   });
+
+  setTimeout(() => {
+    console.log("Forzo la rimozione del loader dopo 1 secondo");
+    hideLoader();
+}, 1000);
 
   // Intersection Observer for fade effects
   const observerOptions = {
