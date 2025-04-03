@@ -173,7 +173,7 @@ body {
 /* Cards Grid and Card Styles */
 .cards-container {
   position: relative;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 4rem auto;
   padding: 0 4rem;
   overflow: visible;
