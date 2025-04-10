@@ -982,3 +982,10 @@ body {
     margin-left: 16px;
   }
 }
+
+.thanks {
+  text-align:center; 
+  vertical-align: middle;
+  margin-top: 64px;
+  color:#ffffff;
+}
