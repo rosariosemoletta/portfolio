@@ -158,8 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
           Client: card.dataset.client || "Project Client",
           Source: card.dataset.source || "Link",
           Role: card.dataset.role || "Lead Designer",
-          Technologies: card.dataset.technologies || "Technology stack used",
-          Year: card.dataset.year || "2023",
+          Tools: card.dataset.tools || "Tools used",
+          Year: card.dataset.year || "Year",
         },
       };
       openModal(projectData);
