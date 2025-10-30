@@ -779,6 +779,14 @@ body {
   height: 100%;
 }
 
+/* Gli iframe YouTube si adattano alla stessa logica */
+.modal-media iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Mantiene proporzioni corrette */
+  border: none;
+  border-radius: 12px;
+}
+
 .modal-title {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
