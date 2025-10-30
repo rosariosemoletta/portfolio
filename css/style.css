@@ -314,9 +314,7 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -893,9 +891,7 @@ body {
   text-transform: uppercase;
   opacity: 0;
   transform: translateY(20px);
-  transition:
-    opacity 0.8s ease-out,
-    transform 0.8s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   margin-right: 64px;
 }
 
@@ -992,8 +988,8 @@ body {
 }
 
 .thanks {
-  text-align:center; 
+  text-align: center;
   vertical-align: middle;
   margin-top: 64px;
-  color:#ffffff;
+  color: #ffffff;
 }

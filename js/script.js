@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(() => {
     console.log("Forzo la rimozione del loader dopo 1 secondo");
     hideLoader();
-}, 1000);
+  }, 1000);
 
   // Intersection Observer for fade effects
   const observerOptions = {
@@ -118,23 +118,23 @@ document.addEventListener("DOMContentLoaded", function () {
     modalTitle.textContent = projectData.title;
     modalDescription.textContent = projectData.description;
 
-// Update media (image or video)
-if (projectData.isVideo) {
-  const url = projectData.mediaUrl;
+    // Update media (image or video)
+    if (projectData.isVideo) {
+      const url = projectData.mediaUrl;
 
-  // Riconosci se è un video YouTube
-  if (url.includes("youtube.com/watch?v=") || url.includes("youtu.be/")) {
-    let videoId = "";
+      // Riconosci se è un video YouTube
+      if (url.includes("youtube.com/watch?v=") || url.includes("youtu.be/")) {
+        let videoId = "";
 
-    // Estrai l'ID del video
-    if (url.includes("youtube.com/watch?v=")) {
-      videoId = new URL(url).searchParams.get("v");
-    } else if (url.includes("youtu.be/")) {
-      videoId = url.split("youtu.be/")[1];
-    }
+        // Estrai l'ID del video
+        if (url.includes("youtube.com/watch?v=")) {
+          videoId = new URL(url).searchParams.get("v");
+        } else if (url.includes("youtu.be/")) {
+          videoId = url.split("youtu.be/")[1];
+        }
 
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    modalMedia.innerHTML = `
+        const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        modalMedia.innerHTML = `
       <iframe
         width="100%"
         height="auto"
@@ -144,14 +144,14 @@ if (projectData.isVideo) {
         allowfullscreen
       ></iframe>
     `;
-  } else {
-    // Video locale
-    modalMedia.innerHTML = `<video src="${url}" controls autoplay></video>`;
-  }
-} else {
-  // Immagine
-  modalMedia.innerHTML = `<img src="${projectData.mediaUrl}" alt="${projectData.title}">`;
-}
+      } else {
+        // Video locale
+        modalMedia.innerHTML = `<video src="${url}" controls autoplay></video>`;
+      }
+    } else {
+      // Immagine
+      modalMedia.innerHTML = `<img src="${projectData.mediaUrl}" alt="${projectData.title}">`;
+    }
 
     // Update project details
     modalDetails.innerHTML = Object.entries(projectData.details)
@@ -161,7 +161,7 @@ if (projectData.isVideo) {
           <div class="modal-detail-label">${label}</div>
           <div class="modal-detail-value">${value}</div>
         </div>
-      `,
+      `
       )
       .join("");
 
