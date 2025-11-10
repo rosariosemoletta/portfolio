@@ -116,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalDetails = document.querySelector(".modal-details");
 
     modalTitle.textContent = projectData.title;
-    modalDescription.textContent = projectData.description;
 
     // Update media (image or video)
     if (projectData.isVideo) {
@@ -152,6 +151,18 @@ document.addEventListener("DOMContentLoaded", function () {
       // Immagine
       modalMedia.innerHTML = `<img src="${projectData.mediaUrl}" alt="${projectData.title}">`;
     }
+     
+    modalDescription.textContent = projectData.description;
+    
+    // 3️⃣ Immagini extra subito dopo la descrizione
+    projectData.images.forEach((url) => {
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = "";
+      img.style.width = "100%";
+      img.style.marginTop = "10px";
+      modalDescription.appendChild(img); // <-- aggiunte qui tra descrizione e dettagli
+    });
 
     // Update project details
     modalDetails.innerHTML = Object.entries(projectData.details)
@@ -184,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mediaUrl:
           card.dataset.videoUrl || card.querySelector(".card-image").src,
         isVideo: !!card.dataset.videoUrl,
+        images: card.dataset.images ? JSON.parse(card.dataset.images) : [], // array di immagini extra
         details: {
           Client: card.dataset.client || "Project Client",
           Source: card.dataset.source || "Link",
