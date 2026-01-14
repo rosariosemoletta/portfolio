@@ -154,7 +154,7 @@ body {
   background-color: transparent;
   position: relative;
   min-height: 100vh;
-  padding: 120px 64px;
+  padding: 64px 64px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -192,7 +192,7 @@ body {
 
 .cards-group.active {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
   width: 100%;
 }
@@ -325,7 +325,7 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-25px);
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -337,7 +337,7 @@ body {
 }
 
 .card-content {
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .card-title {
@@ -362,7 +362,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
   font-size: 0.875rem;
   text-decoration: none;
-  margin-top: 1rem;
+  margin-top: 0rem;
   padding-bottom: 2px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   transition: border-color 0.3s ease;
