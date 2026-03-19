@@ -183,6 +183,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeModal() {
     modalOverlay.classList.remove("active");
     document.body.style.overflow = "";
+    document.querySelectorAll("video").forEach(video => {
+    video.pause();
+    modal.style.display = "none";
+    });
   }
 
   viewDetailsButtons.forEach((button) => {
