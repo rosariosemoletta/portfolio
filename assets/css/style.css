@@ -100,8 +100,9 @@ h1, h2, h3, h4 {
 }
 .nav-links a {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--ink-mid);
   transition: color 0.2s;
 }
@@ -283,15 +284,16 @@ h1, h2, h3, h4 {
   align-items: start;
   padding: clamp(32px, 6vw, 72px) var(--page-pad) clamp(60px, 10vh, 120px);
 }
-/* the info stays in view while the media scrolls; a very long text scrolls inside it */
+/* the info stays in view while the media scrolls. It used to cap its own height and
+   scroll internally for a long description, but that inner scrollbar was hidden by
+   design — invisible to the visitor, it silently ate wheel scrolls whenever the
+   cursor happened to be over the text, fighting the page's own scroll (reported as
+   "extra scrollbars" / jank). A very long description now simply pushes the sticky
+   box past one screenful, exactly like any other sticky sidebar. */
 .project-info {
   position: sticky;
   top: calc(var(--nav-h) + 24px);
-  max-height: calc(100vh - var(--nav-h) - 48px);
-  overflow-y: auto;
-  scrollbar-width: none;
 }
-.project-info::-webkit-scrollbar { display: none; }
 /* back to Home: a proper button, not a footnote — boxed like the nav's icon buttons,
    inverts on hover like the Work filter chips */
 .pj-back {
