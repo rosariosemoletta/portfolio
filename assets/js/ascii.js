@@ -15,10 +15,10 @@
    falls on the BRIGHTEST parts of the photo, reading like a glow.
 
    Movement, skipped under "reduce motion":
-     • on arrival, a slow reveal: nothing shows at first, then rows appear top to bottom,
-       fully formed as they arrive — no scramble, no noise standing in for what is not shown
-       yet, just more of the portrait becoming visible, like a scan or a blind lifting. A
-       one-time thing, not a loop.
+     • on arrival, a quick eased reveal: nothing shows at first, then rows sweep in top to
+       bottom, fully formed as they arrive — no scramble, no noise standing in for what is
+       not shown yet, just more of the portrait becoming visible, fast and fluid rather than
+       a slow print. A one-time thing, not a loop.
      • hovering the portrait brightens the cells near the pointer a little, like a torch —
        driven by the pointer events themselves, not a running timer, so nothing ticks in the
        background while the mouse is elsewhere.
@@ -34,15 +34,20 @@
    ═══════════════════════════════════════════════ */
 
 (function () {
-  var COLOR_SRC = 'assets/img/rosario-bust-color.png';
-  var DEPTH_SRC = 'assets/img/rosario-bust-depth.png';   /* same depth map as the dropped point-cloud experiment:
+  /* Both are only ever sampled down to a ~70x54 grid, so a small, lossily-compressed JPEG
+     costs nothing in quality here but a lot less than the PNG masters did (6.1MB / 2.6MB,
+     mostly because PNG compresses this dotted point-cloud-style texture very poorly — JPEG
+     gets the same two images under 30KB combined). Originals kept in
+     Desktop/rosario-backups/bust-images-before-compression-2026-09-27/. */
+  var COLOR_SRC = 'assets/img/rosario-bust-color.jpg';
+  var DEPTH_SRC = 'assets/img/rosario-bust-depth.jpg';   /* same depth map as the dropped point-cloud experiment:
                                                               only reused here to tell the person from the background */
   var RAMP = ' .:-=+*#%@';   /* light to dense, 10 steps (a well-worn ASCII-art ramp) */
   var LAST = RAMP.length - 1;
   var COLS = 70;             /* characters across; rows follow from the box's own shape */
   var CHAR_ASPECT = 0.58;    /* width:height of one monospace character cell, roughly */
   var FG_THRESHOLD = 0.2;    /* depth map value above which a cell counts as "the person", not backdrop */
-  var REVEAL_MS = 2800;      /* the one-time reveal: slow, deliberate — a scan, not a flash */
+  var REVEAL_MS = 950;       /* the one-time reveal: quick, eased — a fluid tech sweep, not a slow print */
   var HOVER_RADIUS = 6;      /* cells; how far the cursor's brightening reaches */
 
   var reduceMQ = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -158,19 +163,25 @@
 
   /* the one-time reveal: rows arrive top to bottom, fully formed — nothing stands in for a
      row that has not arrived yet, so it reads as the portrait becoming visible, not resolving
-     out of noise. Slow and deliberate on purpose (see REVEAL_MS). */
+     out of noise. Quick and eased (cubic ease-out): it starts at full speed and settles
+     smoothly, reading as one fluid technical sweep rather than a slow, mechanical print. A
+     scanline (like the timeline's playhead in "What I use") tracks the wipe as it descends. */
   function reveal(s) {
     if (reduced()) { renderNow(s); return; }
     var start = performance.now(), last = 0;
+    s.scan.style.opacity = '1';
     function frame(now) {
       if (!current || current !== s) return;   /* the page moved on */
       if (now - last < 40) { s.raf = requestAnimationFrame(frame); return; }
       last = now;
-      var t = Math.min(1, (now - start) / REVEAL_MS);
+      var lin = Math.min(1, (now - start) / REVEAL_MS);
+      var t = 1 - Math.pow(1 - lin, 3);   /* ease-out */
       s.pre.textContent = stringify(s, null, Math.floor(t * s.rows));
-      if (t < 1) { s.raf = requestAnimationFrame(frame); return; }
+      s.scan.style.top = (t * 100) + '%';
+      if (lin < 1) { s.raf = requestAnimationFrame(frame); return; }
       s.raf = 0;
       s.revealed = true;
+      s.scan.style.opacity = '0';
       renderNow(s);   /* picks up the cursor's glow, if the pointer is already over it */
     }
     s.raf = requestAnimationFrame(frame);
@@ -207,10 +218,14 @@
       pre.className = 'ascii-portrait';
       pre.setAttribute('aria-hidden', 'true');   /* the <img>'s alt text still carries the meaning */
       box.appendChild(pre);
+      var scan = document.createElement('i');
+      scan.className = 'ascii-scanline';
+      scan.setAttribute('aria-hidden', 'true');
+      box.appendChild(scan);
       box.classList.add('ascii-live');
 
       var s = {
-        box: box, pre: pre, images: imgs, cols: 0, rows: 0, gray: null, depth: null, baseIdx: null,
+        box: box, pre: pre, scan: scan, images: imgs, cols: 0, rows: 0, gray: null, depth: null, baseIdx: null,
         hoverCol: null, hoverRow: null, revealed: false, ro: null, mo: null, raf: 0
       };
       current = s;
@@ -244,6 +259,7 @@
     if (s.ro) s.ro.disconnect();
     if (s.mo) s.mo.disconnect();
     if (s.pre.parentNode) s.pre.parentNode.removeChild(s.pre);
+    if (s.scan.parentNode) s.scan.parentNode.removeChild(s.scan);
     s.box.classList.remove('ascii-live', 'is-ready');
   }
 

@@ -5,7 +5,7 @@
    place here) with a small "edit monitor" in the site's language:
      • a timeline like an editing app: a thin track with quarter ticks, a playhead
        (the vertical line of After Effects / Premiere), and a timecode readout on
-       hover — all timecodes are MM:SS:FF at 24 fps, like the footer's TC
+       hover — every timecode here is HH:MM:SS:FF at 24 fps, the film-editing convention
      • play / pause, sound on / off (the nav's three bars, flattened when muted),
        full screen (four corner brackets, the site's focus brackets)
      • a centered PLAY tag before the first play, when paused, and REPLAY at the end

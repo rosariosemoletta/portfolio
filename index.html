@@ -15,23 +15,20 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
-  <!-- Open Graph / Twitter Card: the preview shown when this link is shared.
-       og:image needs an ABSOLUTE url once the site has a real domain — replace
-       the path below with the full https:// address at that point. The
-       canonical <link> and the sitemap/robots.txt need the same real domain
-       and are not added yet for the same reason — do all three together on
-       launch day, see the checklist in the [[project-portfolio-site]] memory. -->
+  <!-- Open Graph / Twitter Card: the preview shown when this link is shared. -->
+  <link rel="canonical" href="https://www.rxss.xyz/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Rosario Semoletta">
   <meta property="og:title" content="Rosario Semoletta — Motion & Visual Designer">
   <meta property="og:description" content="Motion graphics, brand design and visual experiences.">
-  <meta property="og:image" content="assets/img/og-image.png">
+  <meta property="og:url" content="https://www.rxss.xyz/">
+  <meta property="og:image" content="https://www.rxss.xyz/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rosario Semoletta — Motion & Visual Designer">
   <meta name="twitter:description" content="Motion graphics, brand design and visual experiences.">
-  <meta name="twitter:image" content="assets/img/og-image.png">
+  <meta name="twitter:image" content="https://www.rxss.xyz/assets/img/og-image.png">
 
   <!-- JSON-LD: helps search engines understand this is a person's portfolio
        (eligible for a richer search result). No domain needed, so this one
@@ -42,6 +39,7 @@
     "@type": "Person",
     "name": "Rosario Semoletta",
     "jobTitle": "Motion & Visual Designer",
+    "url": "https://www.rxss.xyz/",
     "email": "mailto:rosario.semoletta@gmail.com",
     "sameAs": [
       "https://www.linkedin.com/in/rosariosemoletta",
@@ -169,6 +167,25 @@
       font-size: 11px; color: var(--ink-dim);
       letter-spacing: 0.04em;
     }
+    /* left side of the home footer: a real status, not a decorative running clock —
+       edit the text below when this changes (e.g. "Booked until March") */
+    .status-avail {
+      display: inline-flex; align-items: center; gap: 8px;
+      pointer-events: auto;   /* the footer itself ignores clicks; this one link does not */
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.04em;
+      color: var(--ink-dim);
+      transition: color 0.2s;
+    }
+    .status-avail:hover { color: var(--ink); }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: status-breathe 2.6s ease-in-out infinite;
+    }
+    @keyframes status-breathe { 50% { opacity: 0.35; } }
+    @media (prefers-reduced-motion: reduce) { .status-dot { animation: none; } }
 
     /* keyboard focus on a card */
     .c-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
@@ -218,7 +235,9 @@
   </div>
 
   <div id="home-footer">
-    <span>2026 · <span class="timecode" aria-hidden="true" title="How long you have been here, as a film timecode (hours : minutes : seconds : frames at 24 fps)">TC 00:00:00:00</span></span>
+    <a class="status-avail" href="#/contact" aria-label="Available for work — go to Contact">
+      <i class="status-dot" aria-hidden="true"></i>Available for work
+    </a>
     <span>hover to explore · click to open</span>
   </div>
 
@@ -226,7 +245,9 @@
   <main class="page-wrap" id="view"></main>
 
   <footer id="page-footer">
-    <span>2026 · <span class="timecode" aria-hidden="true" title="How long you have been here, as a film timecode (hours : minutes : seconds : frames at 24 fps)">TC 00:00:00:00</span></span>
+    <a class="status-avail" href="#/contact" aria-label="Available for work — go to Contact">
+      <i class="status-dot" aria-hidden="true"></i>Available for work
+    </a>
     <span id="page-footer-right">Motion &amp; Visual Designer</span>
   </footer>
 
@@ -296,7 +317,7 @@
             </div>
             <div class="tl-row" role="listitem">
               <span class="tl-name">Motion &amp; 3D</span>
-              <ul class="tl-track"><li style="--i:3">After Effects</li><li style="--i:4">TouchDesigner</li><li style="--i:5">Blender</li><li style="--i:6">Cinema 4D</li><li style="--i:7">Houdini</li></ul>
+              <ul class="tl-track"><li style="--i:3">Blender</li><li style="--i:4">After Effects</li><li style="--i:5">TouchDesigner</li><li style="--i:6">Cinema 4D</li><li style="--i:7">Houdini</li></ul>
             </div>
             <div class="tl-row" role="listitem">
               <span class="tl-name">Web</span>

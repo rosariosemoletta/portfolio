@@ -74,7 +74,8 @@ var PROJECTS = [
     year:      "2026",
     longDesc:  "A single photograph is the only input: a depth map pulled from it becomes the basis for a procedural reconstruction into a three-dimensional point cloud, assembled node by node in TouchDesigner. The piece sits deliberately between control and experiment — a real-time, node-based system that turns flat imagery into something volumetric, and tests how far depth estimation can push the way an image gets read. It belongs to a longer-running line of work on building spatial experiences out of the least visual information possible, finished with a pass in After Effects.",
     tools:     "TouchDesigner, Adobe After Effects",
-    cover:     "assets/img/pointcloud.png",
+    cover:     "assets/img/pointcloud-cover-810.webp",
+    coverWide: "assets/img/pointcloud-cover-wide-1080.webp",
     media: [
       { type: "video", role: "final", src: "assets/video/orbita-pointcloud-2.mp4", poster: "assets/img/orbita-pointcloud-2-poster.webp", ratio: "1:1" },
       { type: "image", role: "draft", src: "assets/img/orbita-depth1-1080.webp", srcset: "assets/img/orbita-depth1-640.webp 640w, assets/img/orbita-depth1-1080.webp 1080w", avif: "assets/img/orbita-depth1-640.avif 640w, assets/img/orbita-depth1-1080.avif 1080w", ratio: "1:1" },

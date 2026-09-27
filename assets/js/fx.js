@@ -6,7 +6,6 @@
      • Work filters         category chips that reflow the grid with an animation
      • copy buttons         [data-copy="text"] copies it and confirms
      • project pages        ← → keys and horizontal swipe = previous / next project
-     • timecode             the footer counts the time you spend here, like a film timecode
      • console message      a hello for anyone who opens the developer tools
    ═══════════════════════════════════════════════ */
 
@@ -226,28 +225,6 @@
       if (Math.abs(dx) < 80 || Math.abs(dx) < Math.abs(dy) * 1.6 || Date.now() - st > 600) return;
       goProject(dx > 0 ? -1 : 1);   /* swipe right = previous, swipe left = next */
     }, { passive: true });
-  }
-
-  /* ---- timecode: the footer counts the time since you entered, as HH:MM:SS:FF at 24 fps ---- */
-  var tcEls = document.querySelectorAll('.timecode');
-  if (tcEls.length) {
-    var tcStart = window.__gateDone ? performance.now() : null;   /* starts when the entry gate opens */
-    var tcLast  = '';
-    var two = function (n) { return (n < 10 ? '0' : '') + n; };
-
-    var tcFrame = function (now) {
-      requestAnimationFrame(tcFrame);
-      var ms     = tcStart === null ? 0 : now - tcStart;
-      var secs   = Math.floor(ms / 1000);
-      var frames = reduce ? 0 : Math.floor((ms % 1000) / (1000 / 24));   /* no racing digits with reduced motion */
-      var text = 'TC ' + two(Math.floor(secs / 3600)) + ':' + two(Math.floor(secs / 60) % 60) + ':' +
-                 two(secs % 60) + ':' + two(frames);
-      if (text === tcLast) return;
-      tcLast = text;
-      for (var i = 0; i < tcEls.length; i++) tcEls[i].textContent = text;
-    };
-    window.addEventListener('gate:done', function () { if (tcStart === null) tcStart = performance.now(); });
-    requestAnimationFrame(tcFrame);
   }
 
   /* ---- a hello for anyone who opens the developer tools ---- */
