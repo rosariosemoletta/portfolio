@@ -4,7 +4,7 @@
      only one real document to list. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.rxss.xyz/</loc>
+    <loc>https://rxss.xyz/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
