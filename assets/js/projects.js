@@ -87,6 +87,25 @@ var PROJECTS = [
     mood:      "open"
   },
   {
+    id:        "omi-ui-animation-concept",
+    title:     "OMI - UI Animation Concept",
+    tag:       "Motion Design",
+    year:      "2026",
+    longDesc:  "OMI is a conversational shopping assistant: ask a question, get a recommendation, build an outfit, track an order — all inside a single chat. The work here is the motion layer: how a recommendation resolves into the conversation, how one message gives way to the next, the small feedback that keeps a chat interface feeling alive instead of static — built in After Effects using the product's actual screens as the raw material. The interface went through more than one direction as the product evolved, and this pass <strong>wasn't the one that eventually shipped</strong>, but the transitions were built to solve one specific problem: making a conversation feel like the fastest way to shop.\n",
+    client:    "OMI - Emeka Egwuatu",
+    tools:     "Adobe After Effects",
+    cover:     "assets/img/omi-ui-animation-concept-cover-900.webp",
+    coverWide: "assets/img/omi-ui-animation-concept-cover-wide-1080.webp",
+    media: [
+      { type: "video", role: "draft", src: "assets/video/anim-1.mp4", poster: "assets/img/anim-1-poster.webp", ratio: "6:7" },
+      { type: "video", role: "draft", src: "assets/video/anim-2.mp4", poster: "assets/img/anim-2-poster.webp", ratio: "6:7" },
+      { type: "video", role: "draft", src: "assets/video/anim-3.mp4", poster: "assets/img/anim-3-poster.webp", ratio: "6:7" }
+    ],
+    link:      "",
+    color:     "#ece3da",
+    blob:      "#a97a3c"
+  },
+  {
     id:        "particleflow",
     title:     "Particle Flow — Procedural Motion Study",
     tag:       "Motion Design",
@@ -226,8 +245,7 @@ var PROJECTS = [
     tools:     "Blender, After Effects",
     cover:     "assets/img/car-cover-1200.webp",
     media: [
-      { type: "video", role: "final", src: "assets/video/corvette.mp4", poster: "assets/img/corvette-poster.webp", ratio: "2.388" },
-      { type: "placeholder", ratio: "9:16", color: "#c2ceb1" }
+      { type: "video", role: "final", src: "assets/video/corvette.mp4", poster: "assets/img/corvette-poster.webp", ratio: "2.388" }
     ],
     link:      "",
     color:     "#e5e9dc",
