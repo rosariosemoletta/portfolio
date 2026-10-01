@@ -253,6 +253,42 @@ var PROJECTS = [
     mood:      "open"
   },
   {
+    id:        "zenhome-logo-animation-3d-spaces",
+    title:     "ZENHOME - Logo Animation & 3D Spaces",
+    tag:       "Visual Design",
+    year:      "2025",
+    longDesc:  "ZenHome is a home services company that takes the stress out of homeownership: one number, one team, from small repairs to full renovations. The brief here was to give that promise a visual calm. A logo animation introduces the brand with a soft, unhurried rhythm, followed by a set of stills and short animated loops set in a three-dimensional home: quiet rooms, considered furniture, light that lingers. Pacing and restraint did most of the work, so the result feels like the experience the brand sells rather than a description of it.",
+    client:    "Zenhome",
+    tools:     "Adobe After Effects, Blender",
+    cover:     "assets/img/zenhome-logo-animation-3d-spaces-cover-900.webp",
+    coverWide: "assets/img/zenhome-logo-animation-3d-spaces-cover-wide-1200.webp",
+    media: [
+      { type: "video", role: "final", src: "assets/video/zenhome-logo-animation-3d-spaces-zenhome-intro-hq-fix.mp4", poster: "assets/img/zenhome-logo-animation-3d-spaces-zenhome-intro-hq-fix-poster.webp", ratio: "16:9" },
+      { type: "video", role: "draft", src: "assets/video/zenhome-logo-animation-3d-spaces-cast-2-new.mp4", poster: "assets/img/zenhome-logo-animation-3d-spaces-cast-2-new-poster.webp", ratio: "9:16" },
+      { type: "video", role: "draft", src: "assets/video/zenhome-logo-animation-3d-spaces-cast-3-new-2.mp4", poster: "assets/img/zenhome-logo-animation-3d-spaces-cast-3-new-2-poster.webp", ratio: "9:16" },
+      { type: "video", role: "draft", src: "assets/video/zenhome-logo-animation-3d-spaces-cast-1-new.mp4", poster: "assets/img/zenhome-logo-animation-3d-spaces-cast-1-new-poster.webp", ratio: "16:9" }
+    ],
+    link:      "",
+    color:     "#ece3da",
+    blob:      "#a97a3c"
+  },
+  {
+    id:        "kevin-lavitt",
+    title:     "KEVIN LAVITT - Motion Graphics",
+    tag:       "Motion Design",
+    year:      "2024",
+    longDesc:  "For Kevin Lavitt, a sound designer, this video intro leans on a synthwave palette — neon, retro-futuristic grids, light that behaves like it's coming off a CRT. It was cut to Kevin's own sound design rather than the other way around, so the piece reads less like graphics with music under it and more like one continuous audiovisual idea.",
+    client:    "Kevin Lavitt",
+    tools:     "Adobe After Effects",
+    cover:     "assets/img/kevin-lavitt-motion-graphics-cover-810.webp",
+    media: [
+      { type: "video", role: "final", src: "assets/video/kevin-lavitt-motion-graphics-kl.mp4", poster: "assets/img/kevin-lavitt-motion-graphics-kl-poster.webp", ratio: "16:9" }
+    ],
+    link:      "www.kevinlavitt.com",
+    color:     "#ece3da",
+    blob:      "#a97a3c"
+  },
+  {
     id:        "miles-morales",
     title:     "MILES MORALES - 3D Animation",
     tag:       "Motion Design",
@@ -331,22 +367,6 @@ var PROJECTS = [
       { type: "video", role: "final", src: "assets/video/caesar-nft-project-caesar.mp4", poster: "assets/img/caesar-nft-project-caesar-poster.webp", ratio: "4:5" }
     ],
     link:      "",
-    color:     "#ece3da",
-    blob:      "#a97a3c"
-  },
-  {
-    id:        "kevin-lavitt",
-    title:     "KEVIN LAVITT - Motion Graphics",
-    tag:       "Motion Design",
-    year:      "2024",
-    longDesc:  "For Kevin Lavitt, a sound designer, this video intro leans on a synthwave palette — neon, retro-futuristic grids, light that behaves like it's coming off a CRT. It was cut to Kevin's own sound design rather than the other way around, so the piece reads less like graphics with music under it and more like one continuous audiovisual idea.",
-    client:    "Kevin Lavitt",
-    tools:     "Adobe After Effects",
-    cover:     "assets/img/kevin-lavitt-motion-graphics-cover-810.webp",
-    media: [
-      { type: "video", role: "final", src: "assets/video/kevin-lavitt-motion-graphics-kl.mp4", poster: "assets/img/kevin-lavitt-motion-graphics-kl-poster.webp", ratio: "16:9" }
-    ],
-    link:      "www.kevinlavitt.com",
     color:     "#ece3da",
     blob:      "#a97a3c"
   },
