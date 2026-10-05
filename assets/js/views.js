@@ -22,7 +22,8 @@
   }
 
   /* ---- WORK: filters + grid of all projects ---- */
-  function work() {
+  function work(route) {
+    var onDrafts = !!route && route.panel === 'drafts';
     var tags = [];
     PROJECTS.forEach(function (p) { if (tags.indexOf(p.tag) < 0) tags.push(p.tag); });
 
@@ -32,7 +33,7 @@
         tags.map(function (t) { return '<button type="button" class="chip" data-tag="' + esc(t) + '" aria-pressed="false">' + t + '</button>'; }).join('') +
       '</div>';
 
-    var cards = PROJECTS.map(function (p) {
+    var cards = PROJECTS.map(function (p, i) {
       /* no cover yet: a colored block with the title, so the grid still reads well */
       var media = p.cover
         ? '<img class="project-card-img" src="' + (p.coverWide || p.cover) + '" alt="' + esc(p.title) + '" loading="lazy">'
@@ -42,8 +43,8 @@
             '<span class="project-card-ph-title">' + p.title + '</span>' +
           '</div>';
 
-      return '<a class="project-card fade-in" href="#/project/' + p.id + '" data-tag="' + esc(p.tag) + '" data-cursor="View" ' +
-               'style="background:' + (p.color || '#eee') + '">' +
+      return '<a class="project-card" href="#/project/' + p.id + '" data-tag="' + esc(p.tag) + '" data-cursor="View" ' +
+               'style="background:' + (p.color || '#eee') + ';--i:' + i + '">' +
                media +
                '<div class="project-card-overlay">' +
                  '<div class="project-card-info">' +
@@ -54,13 +55,29 @@
              '</a>';
     }).join('');
 
+    /* the header switches between the projects and the drafts gallery, in place (router.js) */
+    var switchBtn = function (panel, label) {
+      return '<button type="button" class="work-switch-btn" data-panel="' + panel + '" aria-pressed="' + (onDrafts === (panel === 'drafts')) + '">' + label + '</button>';
+    };
+
     return {
       title: 'Work — Rosario Semoletta',
       html:
         '<section class="section">' +
-          '<div class="section-label">Selected work</div>' +
-          chips +
-          '<div class="projects-grid">' + cards + '</div>' +
+          '<div class="section-label">' +
+            '<div class="work-switch" role="group" aria-label="What to show" data-on="' + (onDrafts ? 'drafts' : 'work') + '">' +
+              '<span class="work-switch-thumb" aria-hidden="true"></span>' +
+              switchBtn('work', 'Selected work') + switchBtn('drafts', 'Drafts') +
+            '</div>' +
+          '</div>' +
+          '<div class="work-panel" data-panel="work"' + (onDrafts ? ' hidden' : '') + '>' +
+            chips +
+            '<div class="projects-grid">' + cards + '</div>' +
+          '</div>' +
+          '<div class="work-panel" data-panel="drafts"' + (onDrafts ? '' : ' hidden') + '>' +
+            '<div class="drafts-toolbar"><span class="drafts-hint"><span class="hint-hover">Hover a piece to preview it</span><span class="hint-touch">Tap a piece to preview it</span></span></div>' +
+            '<div class="drafts-stage" role="group" aria-label="Draft gallery"></div>' +
+          '</div>' +
         '</section>'
     };
   }

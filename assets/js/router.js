@@ -5,6 +5,7 @@
      #/work              all projects
      #/project/<id>      one project
      #/about   #/contact
+     #/drafts            the circle → grid draft gallery (not linked in the nav yet)
      anything else       the "signal lost" page
 
    Why: a page reload destroys the audio engine and browsers only allow audio
@@ -37,10 +38,12 @@
     var name  = parts[0] || 'home';
     if (name === 'home' && !parts[1]) return { name: 'home' };
     if (name === 'project' && parts[1]) return { name: 'project', id: decodeURIComponent(parts[1]) };
-    if (name === 'work' || name === 'about' || name === 'contact') return { name: name };
+    if (name === 'work')    return { name: 'work', panel: 'work' };
+    if (name === 'drafts')  return { name: 'work', panel: 'drafts' };   /* the drafts are a panel of Work */
+    if (name === 'about' || name === 'contact') return { name: name };
     return { name: 'notfound', what: 'page', path: '#/' + raw };
   }
-  function same(a, b) { return !!a && a.name === b.name && a.id === b.id && a.path === b.path; }
+  function same(a, b) { return !!a && a.name === b.name && a.id === b.id && a.path === b.path && a.panel === b.panel; }
 
   function setActiveNav(r) {
     var section = r.name === 'project' ? 'work' : r.name;   /* a project belongs to Work */
@@ -73,6 +76,7 @@
 
     if (window.Media) window.Media.destroy();   /* stops the videos and the layout of the page we leave */
     if (window.Ascii) window.Ascii.destroy();   /* stops the About ASCII portrait, if it was running */
+    if (window.DraftGallery) window.DraftGallery.destroy();   /* stops the Drafts page, if it was running */
 
     if (isHome) {
       view.innerHTML = '';   /* also stops a project video that was still playing */
@@ -86,10 +90,13 @@
     view.innerHTML = v.html;
     if (window.Media) window.Media.init(view);   /* lays out the project's media (no-op on other pages) */
     if (window.Ascii) window.Ascii.init(view);   /* the About ASCII portrait (no-op elsewhere) */
+    if (window.DraftGallery) window.DraftGallery.init(view);   /* the drafts panel of Work (no-op elsewhere) */
+    if (r.name === 'work' && r.panel === 'drafts' && window.DraftGallery) window.DraftGallery.show();
     footerRight.innerHTML = v.footer || DEFAULT_FOOTER;
     document.title = v.title;
     window.scrollTo(0, 0);
     if (window.initFadeIns) window.initFadeIns(view);
+    revealCards(view);
 
     if (window.Sfx) {
       window.Sfx.mood(v.mood);                 /* the pad follows the project's mood */
@@ -156,6 +163,41 @@
     vt.ready.catch(function () {});   /* a newer navigation can skip this transition: that is not an error */
     vt.finished.then(cleanup, cleanup);
   }
+
+  /* Work cards unveil when they come into view (CSS in style.css: .project-card.is-in) */
+  function revealCards(scope) {
+    var cards = scope.querySelectorAll('.projects-grid .project-card');
+    if (!cards.length) return;
+    if (!('IntersectionObserver' in window)) { [].forEach.call(cards, function (c) { c.classList.add('is-in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15 });
+    [].forEach.call(cards, function (c) { io.observe(c); });
+  }
+
+  /* the Work header's switch: Selected work / Drafts, in place (the address follows without a new page) */
+  function switchPanel(panel) {
+    var group = view.querySelector('.work-switch');
+    if (group) group.setAttribute('data-on', panel);
+    view.querySelectorAll('.work-switch-btn').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-panel') === panel));
+    });
+    view.querySelectorAll('.work-panel').forEach(function (p) {
+      p.hidden = p.getAttribute('data-panel') !== panel;
+    });
+    if (current && current.name === 'work') current.panel = panel;
+    history.replaceState(null, '', '#/' + (panel === 'drafts' ? 'drafts' : 'work'));
+    if (window.DraftGallery) { if (panel === 'drafts') window.DraftGallery.show(); else window.DraftGallery.hide(); }
+    if (window.Sfx) window.Sfx.section(panel === 'drafts' ? 'drafts' : 'work');
+  }
+  view.addEventListener('click', function (e) {
+    var sw = e.target.closest ? e.target.closest('.work-switch-btn') : null;
+    if (sw) switchPanel(sw.getAttribute('data-panel'));
+  });
 
   window.addEventListener('hashchange', go);
 

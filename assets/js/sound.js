@@ -537,6 +537,10 @@
           sweepNoise(t, 0.5, 800, 6000, 0.03, 1.4, 0.7, 0.85);
           zap(t + 0.05, 260, 600, 0.1, 500, 3200, 0.035, 0.85, 0.4);
           zap(t + 0.15, 390, 900, 0.1, 600, 3600, 0.035, 0.85, 0.4);
+        } else if (name === 'drafts') {    /* loose and exploratory: a couple of soft taps settling into one clear zap */
+          sweepNoise(t, 0.5, 600, 3200, 0.03, 1.3, 0.65, 0.75);
+          zap(t + 0.04, 500, 240, 0.1, 1800, 500, 0.03, 0.8, 0.35);
+          zap(t + 0.16, 260, 620, 0.16, 400, 2600, 0.04, 0.85, 0.4);
         } else {                           /* home: a falling sweep, like settling back */
           sweepNoise(t, 0.5, 3500, 400, 0.03, 1.4, 0.6, 0.4);
           zap(t + 0.05, 500, 200, 0.16, 2400, 350, 0.04, 0.85, 0.4);

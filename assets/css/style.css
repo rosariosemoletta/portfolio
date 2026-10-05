@@ -219,6 +219,28 @@ h1, h2, h3, h4 {
 .project-card:hover .project-card-img {
   transform: scale(1.04);
 }
+/* Work: each card fades in, and its picture is unveiled from the top down (a mask
+   descending, like a frame being exposed) while it clears from transparent, settling
+   from a slight zoom. router.js adds .is-in when a card scrolls into view, so cards
+   below the fold wait for their turn. The mask sits on the picture, not the card: a
+   clipped card would never count as "in view" to the observer. */
+@keyframes work-fade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes work-unveil { from { clip-path: inset(0 0 100% 0); opacity: 0; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes work-settle { from { transform: scale(1.14); } to { transform: scale(1); } }
+.projects-grid .project-card:not(.is-in) { opacity: 0; }
+.projects-grid .project-card:not(.is-in) .project-card-img { clip-path: inset(0 0 100% 0); opacity: 0; }
+.projects-grid .project-card.is-in {
+  animation: work-fade 0.5s var(--ease-out) backwards;
+  animation-delay: calc(min(var(--i, 0), 4) * 70ms);
+}
+.projects-grid .project-card.is-in .project-card-img {
+  animation: work-unveil 1.1s var(--ease-out) backwards, work-settle 1.6s var(--ease-out) backwards;
+  animation-delay: calc(min(var(--i, 0), 4) * 70ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .projects-grid .project-card:not(.is-in), .projects-grid .project-card:not(.is-in) .project-card-img { opacity: 1; clip-path: none; }
+  .projects-grid .project-card, .projects-grid .project-card .project-card-img { animation: none; }
+}
 /* card without a cover image yet: colored block with the title always visible */
 .project-card-placeholder {
   position: relative;
@@ -1041,3 +1063,76 @@ html.cur-label #cursor-tag  { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .lost-code, .glitch::before, .glitch::after { animation: none; }
 }
+
+/* ---- DRAFTS GALLERY (assets/js/draftGallery.js) ----
+   The placeholder pieces reuse the Work grid's placeholder-card chrome
+   (.project-card-placeholder etc.); the corner brackets reuse the video player's
+   difference-blend bracket chrome (.vp-br above). The stage runs its
+   own masonry layout, not media.js's: that one packs a narrow project-page column
+   into two halves, where this stage is the full page width and wants many columns.
+   Pieces fly into their cells once, on arrival (JS, the home carousel's own spring);
+   from then on it is a plain grid. */
+/* the Work header's switch: a two-position pill (router.js moves data-on) that reads as a toggle */
+.work-switch {
+  position: relative;
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  margin-right: 16px;
+}
+.work-switch-thumb {
+  position: absolute; top: 3px; bottom: 3px; left: 3px;
+  width: 150px;
+  border-radius: 999px;
+  background: var(--ink);
+  transition: transform 0.45s var(--ease-out);
+}
+.work-switch[data-on="drafts"] .work-switch-thumb { transform: translateX(150px); }
+.work-switch-btn {
+  position: relative; z-index: 1;
+  width: 150px; height: 32px;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-mid);
+  background: none; border: 0; border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.work-switch-btn:hover { color: var(--ink); }
+.work-switch-btn[aria-pressed="true"] { color: var(--on-ink); }
+.work-switch-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.drafts-toolbar { margin: -20px 0 28px; }
+.drafts-hint { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); }
+.drafts-hint .hint-touch { display: none; }
+@media (hover: none) {
+  .drafts-hint .hint-hover { display: none; }
+  .drafts-hint .hint-touch { display: inline; }
+}
+
+.drafts-stage {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+}
+.drafts-stage .media-item {
+  position: absolute; top: 0; left: 0;
+  transition: opacity 0.6s var(--ease-out), border-color 0.25s, filter 0.6s var(--ease-out);
+}
+.drafts-stage .media-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.drafts-stage .media-item:hover, .drafts-stage .media-item.is-preview { border-color: var(--line-strong); }
+/* while one piece is previewed, the rest soften */
+.drafts-stage.is-previewing .media-item { filter: blur(3px); }
+.drafts-stage.is-previewing .media-item.is-preview { filter: none; }
+
+/* corner brackets: the same difference-blend treatment as the video player and the
+   carousel's focus brackets, scaled down for a small tile; only on hover/focus */
+.d-br { position: absolute; width: 9px; height: 9px; border: 0 solid #fff; mix-blend-mode: difference; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+.d-br-tl { top: 4px; left: 4px; border-top-width: 1.5px; border-left-width: 1.5px; }
+.d-br-tr { top: 4px; right: 4px; border-top-width: 1.5px; border-right-width: 1.5px; }
+.d-br-bl { bottom: 4px; left: 4px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.d-br-br { bottom: 4px; right: 4px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+.drafts-stage .media-item:hover .d-br, .drafts-stage .media-item:focus-within .d-br { opacity: 0.9; }
+
+
