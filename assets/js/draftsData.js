@@ -16,6 +16,7 @@
  *   ratio   → optional, e.g. "16:9". The Studio fills this in automatically; without it the
  *             site measures the real file once the piece settles into the grid.
  *   alt     → optional description (accessibility label).
+ *   span    → optional. "wide" takes two columns, "single" one. Without it the width follows the shape.
  */
 
 var DRAFTS = [
@@ -32,6 +33,5 @@ var DRAFTS = [
   { type: "image", src: "assets/img/draft-abstract-1-1920.webp", srcset: "assets/img/draft-abstract-1-640.webp 640w, assets/img/draft-abstract-1-1280.webp 1280w, assets/img/draft-abstract-1-1920.webp 1920w", avif: "assets/img/draft-abstract-1-640.avif 640w, assets/img/draft-abstract-1-1280.avif 1280w, assets/img/draft-abstract-1-1920.avif 1920w", ratio: "16:9" },
   { type: "image", src: "assets/img/draft-polygons-1920.webp", srcset: "assets/img/draft-polygons-640.webp 640w, assets/img/draft-polygons-1280.webp 1280w, assets/img/draft-polygons-1920.webp 1920w", avif: "assets/img/draft-polygons-640.avif 640w, assets/img/draft-polygons-1280.avif 1280w, assets/img/draft-polygons-1920.avif 1920w", ratio: "4:5", alpha: true },
   { type: "image", src: "assets/img/draft-red-jewel-1920.webp", srcset: "assets/img/draft-red-jewel-640.webp 640w, assets/img/draft-red-jewel-1280.webp 1280w, assets/img/draft-red-jewel-1920.webp 1920w", avif: "assets/img/draft-red-jewel-640.avif 640w, assets/img/draft-red-jewel-1280.avif 1280w, assets/img/draft-red-jewel-1920.avif 1920w", ratio: "1:1" },
-  { type: "image", src: "assets/img/draft-skull-1-1080.webp", srcset: "assets/img/draft-skull-1-640.webp 640w, assets/img/draft-skull-1-1080.webp 1080w", avif: "assets/img/draft-skull-1-640.avif 640w, assets/img/draft-skull-1-1080.avif 1080w", ratio: "9:16" },
-  { type: "video", src: "assets/video/draft-anim-2.mp4", poster: "assets/img/draft-anim-2-poster.webp", ratio: "1:1" }
+  { type: "image", src: "assets/img/draft-skull-1-1080.webp", srcset: "assets/img/draft-skull-1-640.webp 640w, assets/img/draft-skull-1-1080.webp 1080w", avif: "assets/img/draft-skull-1-640.avif 640w, assets/img/draft-skull-1-1080.avif 1080w", ratio: "9:16" }
 ];
